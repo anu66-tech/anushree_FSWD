@@ -1,0 +1,40 @@
+import React from "react";
+
+function App() {
+  const bookTicket = () => {
+    const name = prompt("Enter Passenger Name:");
+    if (!name) {
+      alert("Booking cancelled!");
+      return;
+    }
+
+    const from = prompt("Enter Departure City:");
+    const to = prompt("Enter Destination City:");
+
+    const confirmBooking = confirm(
+      "Confirm Booking Details:\n\n" +
+      "Passenger: " + name + "\n" +
+      "From: " + from + "\n" +
+      "To: " + to
+    );
+
+    if (confirmBooking) {
+      alert(
+        "✈️ Ticket Booked Successfully!\n\n" +
+        "Name: " + name + "\n" +
+        "Route: " + from + " → " + to
+      );
+    } else {
+      alert("Booking Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Flight Ticket Booking System</h2>
+      <button onClick={bookTicket}>Book Flight Ticket</button>
+    </div>
+  );
+}
+
+export default App;

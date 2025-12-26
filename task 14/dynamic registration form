@@ -1,0 +1,54 @@
+import React, { useState } from "react";
+
+function App() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    workshop: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div style={{ padding: "20px", display: "flex", gap: "40px" }}>
+      {/* Registration Form */}
+      <div>
+        <h2>Workshop Registration</h2>
+
+        <label>Name:</label><br />
+        <input
+          type="text"
+          name="name"
+          onChange={handleChange}
+        /><br /><br />
+
+        <label>Email:</label><br />
+        <input
+          type="email"
+          name="email"
+          onChange={handleChange}
+        /><br /><br />
+
+        <label>Workshop:</label><br />
+        <select name="workshop" onChange={handleChange}>
+          <option value="">Select</option>
+          <option value="React Basics">React Basics</option>
+          <option value="MERN Stack">MERN Stack</option>
+          <option value="AI Fundamentals">AI Fundamentals</option>
+        </select>
+      </div>
+
+      {/* Live Preview */}
+      <div>
+        <h2>Live Preview</h2>
+        <p><strong>Name:</strong> {form.name}</p>
+        <p><strong>Email:</strong> {form.email}</p>
+        <p><strong>Workshop:</strong> {form.workshop}</p>
+      </div>
+    </div>
+  );
+}
+
+export default App;

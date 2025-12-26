@@ -1,0 +1,66 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+function App() {
+  const [students, setStudents] = useState([]);
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const fetchStudents = async () => {
+    const res = await axios.get("http://localhost:5000/students");
+    setStudents(res.data);
+  };
+
+  const addStudent = async () => {
+    if (!name) return;
+    await axios.post("http://localhost:5000/students", {
+      name,
+      present: false
+    });
+    setName("");
+    fetchStudents();
+  };
+
+  const toggleAttendance = async (id, present) => {
+    await axios.put(`http://localhost:5000/students/${id}`, {
+      present: !present
+    });
+    fetchStudents();
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>📋 Attendance Tracker</h2>
+
+      <input
+        type="text"
+        placeholder="Student name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <button onClick={addStudent}>Add</button>
+
+      <ul>
+        {students.map((student) => (
+          <li key={student._id}>
+            {student.name} - 
+            <strong style={{ marginLeft: "10px" }}>
+              {student.present ? "Present ✅" : "Absent ❌"}
+            </strong>
+            <button
+              style={{ marginLeft: "10px" }}
+              onClick={() => toggleAttendance(student._id, student.present)}
+            >
+              Toggle
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;

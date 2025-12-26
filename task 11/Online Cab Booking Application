@@ -1,0 +1,40 @@
+import React from "react";
+
+function App() {
+  const bookCab = () => {
+    const name = prompt("Enter Passenger Name:");
+    if (!name) {
+      alert("Cab booking cancelled!");
+      return;
+    }
+
+    const pickup = prompt("Enter Pickup Location:");
+    const drop = prompt("Enter Drop Location:");
+
+    const confirmBooking = confirm(
+      "Confirm Cab Booking Details:\n\n" +
+      "Passenger: " + name + "\n" +
+      "Pickup: " + pickup + "\n" +
+      "Drop: " + drop
+    );
+
+    if (confirmBooking) {
+      alert(
+        "🚕 Cab Booked Successfully!\n\n" +
+        "Passenger: " + name + "\n" +
+        "Route: " + pickup + " → " + drop
+      );
+    } else {
+      alert("Booking Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Online Cab Booking Application</h2>
+      <button onClick={bookCab}>Book Cab</button>
+    </div>
+  );
+}
+
+export default App;

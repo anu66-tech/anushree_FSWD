@@ -1,0 +1,40 @@
+import React from "react";
+
+function App() {
+  const registerEvent = () => {
+    const name = prompt("Enter Your Name:");
+    if (!name) {
+      alert("Registration cancelled!");
+      return;
+    }
+
+    const email = prompt("Enter Your Email:");
+    const eventName = prompt("Enter Event Name:");
+
+    const confirmRegistration = confirm(
+      "Confirm Event Registration Details:\n\n" +
+      "Name: " + name + "\n" +
+      "Email: " + email + "\n" +
+      "Event: " + eventName
+    );
+
+    if (confirmRegistration) {
+      alert(
+        "🎉 Registration Successful!\n\n" +
+        "Participant: " + name + "\n" +
+        "Event: " + eventName
+      );
+    } else {
+      alert("Registration Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Event Registration System</h2>
+      <button onClick={registerEvent}>Register for Event</button>
+    </div>
+  );
+}
+
+export default App;

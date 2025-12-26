@@ -1,0 +1,41 @@
+import React from "react";
+
+function App() {
+  const reserveRoom = () => {
+    const name = prompt("Enter Guest Name:");
+    if (!name) {
+      alert("Reservation cancelled!");
+      return;
+    }
+
+    const roomType = prompt("Enter Room Type (Single / Double):");
+    const nights = prompt("Enter Number of Nights:");
+
+    const confirmReservation = confirm(
+      "Confirm Reservation Details:\n\n" +
+      "Guest Name: " + name + "\n" +
+      "Room Type: " + roomType + "\n" +
+      "Nights: " + nights
+    );
+
+    if (confirmReservation) {
+      alert(
+        "🏨 Room Reserved Successfully!\n\n" +
+        "Guest: " + name + "\n" +
+        "Room: " + roomType + "\n" +
+        "Nights: " + nights
+      );
+    } else {
+      alert("Reservation Cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Hotel Reservation System</h2>
+      <button onClick={reserveRoom}>Reserve Room</button>
+    </div>
+  );
+}
+
+export default App;

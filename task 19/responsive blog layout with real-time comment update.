@@ -1,0 +1,98 @@
+import { useState } from "react";
+
+function App() {
+  const [comments, setComments] = useState([]);
+  const [text, setText] = useState("");
+
+  const addComment = () => {
+    if (text.trim() === "") return;
+    setComments([{ id: Date.now(), message: text }, ...comments]);
+    setText("");
+  };
+
+  return (
+    <div style={styles.container}>
+      {/* Blog Section */}
+      <div style={styles.blog}>
+        <h1>📝 My Tech Blog</h1>
+        <p style={styles.date}>Posted on Jan 2025</p>
+        <p>
+          React makes it easy to build interactive UIs. In this blog, we
+          demonstrate how comments can be updated live without page refresh.
+        </p>
+      </div>
+
+      {/* Comment Section */}
+      <div style={styles.comments}>
+        <h3>💬 Comments ({comments.length})</h3>
+
+        <textarea
+          placeholder="Write a comment..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          style={styles.textarea}
+        />
+
+        <button onClick={addComment} style={styles.button}>
+          Post Comment
+        </button>
+
+        {comments.length === 0 && <p>No comments yet</p>}
+
+        {comments.map((c) => (
+          <div key={c.id} style={styles.commentBox}>
+            {c.message}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Arial",
+    maxWidth: "800px",
+    margin: "auto",
+    padding: "20px"
+  },
+  blog: {
+    background: "#f5f7fa",
+    padding: "20px",
+    borderRadius: "10px",
+    marginBottom: "20px"
+  },
+  date: {
+    color: "gray",
+    fontSize: "14px"
+  },
+  comments: {
+    background: "#ffffff",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+  },
+  textarea: {
+    width: "100%",
+    height: "80px",
+    padding: "10px",
+    marginBottom: "10px",
+    borderRadius: "5px"
+  },
+  button: {
+    padding: "10px 15px",
+    backgroundColor: "#007BFF",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer"
+  },
+  commentBox: {
+    background: "#f1f1f1",
+    padding: "10px",
+    marginTop: "10px",
+    borderRadius: "5px"
+  }
+};
+
+export default App;

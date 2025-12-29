@@ -1,0 +1,87 @@
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+function Dashboard() {
+  return (
+    <div>
+      <h3>📊 Dashboard</h3>
+      <p>Total Students: 3</p>
+      <p>Departments: CSE, IT, ECE</p>
+    </div>
+  );
+}
+
+function Students() {
+  const students = [
+    { id: 1, name: "Anu", dept: "CSE" },
+    { id: 2, name: "Kavi", dept: "IT" },
+    { id: 3, name: "Riya", dept: "ECE" }
+  ];
+
+  return (
+    <div>
+      <h3>📋 Student List</h3>
+      {students.map((s) => (
+        <p key={s.id}>
+          {s.name} - {s.dept}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function Profile() {
+  return (
+    <div>
+      <h3>👤 Profile</h3>
+      <p>Name: Admin</p>
+      <p>Role: Student Coordinator</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div style={styles.container}>
+        <h2>🎓 Student Dashboard</h2>
+
+        {/* Navigation */}
+        <nav style={styles.nav}>
+          <Link to="/" style={styles.link}>Dashboard</Link>
+          <Link to="/students" style={styles.link}>Students</Link>
+          <Link to="/profile" style={styles.link}>Profile</Link>
+        </nav>
+
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Arial",
+    maxWidth: "800px",
+    margin: "auto",
+    padding: "20px",
+    textAlign: "center"
+  },
+  nav: {
+    marginBottom: "20px"
+  },
+  link: {
+    margin: "0 10px",
+    textDecoration: "none",
+    color: "white",
+    backgroundColor: "#007BFF",
+    padding: "8px 12px",
+    borderRadius: "5px"
+  }
+};
+
+export default App;

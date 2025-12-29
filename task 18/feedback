@@ -1,0 +1,80 @@
+import { useState } from "react";
+
+function App() {
+  const [notifications, setNotifications] = useState([]);
+
+  const addNotification = () => {
+    const newNotification = {
+      id: Date.now(),
+      message: "🔔 New notification received!"
+    };
+    setNotifications([newNotification, ...notifications]);
+  };
+
+  const removeNotification = (id) => {
+    setNotifications(notifications.filter((n) => n.id !== id));
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>📊 Dashboard Notifications</h2>
+
+      <button onClick={addNotification} style={styles.button}>
+        Add Notification
+      </button>
+
+      <div style={styles.list}>
+        {notifications.length === 0 && <p>No notifications</p>}
+
+        {notifications.map((n) => (
+          <div key={n.id} style={styles.notification}>
+            <span>{n.message}</span>
+            <button
+              onClick={() => removeNotification(n.id)}
+              style={styles.close}
+            >
+              ❌
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Arial",
+    padding: "20px",
+    maxWidth: "400px",
+    margin: "auto",
+    textAlign: "center"
+  },
+  button: {
+    padding: "10px",
+    backgroundColor: "#4CAF50",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer"
+  },
+  list: {
+    marginTop: "20px"
+  },
+  notification: {
+    backgroundColor: "#f1f1f1",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  close: {
+    background: "none",
+    border: "none",
+    cursor: "pointer"
+  }
+};
+
+export default App;

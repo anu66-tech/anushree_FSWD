@@ -1,0 +1,93 @@
+import { useState } from "react";
+
+function App() {
+  const [page, setPage] = useState("dashboard");
+
+  const students = [
+    { id: 1, name: "Anu", dept: "CSE", year: "3rd Year" },
+    { id: 2, name: "Kavi", dept: "IT", year: "2nd Year" },
+    { id: 3, name: "Riya", dept: "ECE", year: "1st Year" }
+  ];
+
+  return (
+    <div style={styles.container}>
+      <h2>🎓 Student Management Dashboard</h2>
+
+      {/* Navigation */}
+      <div style={styles.nav}>
+        <button onClick={() => setPage("dashboard")} style={styles.navBtn}>
+          Dashboard
+        </button>
+        <button onClick={() => setPage("students")} style={styles.navBtn}>
+          Students
+        </button>
+        <button onClick={() => setPage("profile")} style={styles.navBtn}>
+          Profile
+        </button>
+      </div>
+
+      {/* Pages */}
+      {page === "dashboard" && (
+        <div style={styles.card}>
+          <h3>📊 Dashboard Overview</h3>
+          <p>Total Students: {students.length}</p>
+          <p>Departments: CSE, IT, ECE</p>
+        </div>
+      )}
+
+      {page === "students" && (
+        <div style={styles.card}>
+          <h3>📋 Student List</h3>
+          {students.map((s) => (
+            <div key={s.id} style={styles.student}>
+              <strong>{s.name}</strong> — {s.dept} ({s.year})
+            </div>
+          ))}
+        </div>
+      )}
+
+      {page === "profile" && (
+        <div style={styles.card}>
+          <h3>👤 Admin Profile</h3>
+          <p>Name: Admin</p>
+          <p>Role: Student Coordinator</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Arial",
+    maxWidth: "800px",
+    margin: "auto",
+    padding: "20px",
+    textAlign: "center"
+  },
+  nav: {
+    marginBottom: "20px"
+  },
+  navBtn: {
+    margin: "5px",
+    padding: "10px 15px",
+    border: "none",
+    borderRadius: "5px",
+    backgroundColor: "#007BFF",
+    color: "white",
+    cursor: "pointer"
+  },
+  card: {
+    background: "#f4f6f8",
+    padding: "20px",
+    borderRadius: "10px"
+  },
+  student: {
+    background: "#ffffff",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "5px"
+  }
+};
+
+export default App;
